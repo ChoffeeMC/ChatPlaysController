@@ -28,9 +28,11 @@ A controller interface for chat plays: twitch.tv/choffeemc
 - **Why is there a random emote at the end?**
     Twitch doesnt allow the same message to be sent within 30 seconds of the previous message. This gets around that.
 <br />
+
 - **Why are the number of presses limited to 10?**
     So that 1 person in chat can't do too many actions at a time.
 <br />
+
 - **Why can't different buttons be pressed in a message?**
     So that when multiple people are playing, 1 person can't just automatically do a specific action chain. I want it to be a bit chaotic if there are a lot of people playing. It makes it more interesting.
 
