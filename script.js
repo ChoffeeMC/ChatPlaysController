@@ -1,5 +1,6 @@
 var selectedButton = ""
-var prevUUIDEmote = "Kappa"
+var uniqueMessageEmotes = ["Kappa", "PogChamp", "PixelBob", "LUL", "KonCha", "TPFunfun", "KAPOW", "Jebaited"]
+var prevUniqueEmoteIndex = 0
 
 window.onload = (event) => {
   document.getElementById("chat-message").value = "";
@@ -16,6 +17,16 @@ function press_button(button) {
   document.getElementById("chat-message").value = parseMessage(button);
 }
 
+function wrapAround(number, min, max) {
+  if (number < min) {
+      return max;
+  } else if (number > max) {
+      return min;
+  } else {
+      return number;
+  }
+}
+
 function parseMessage(button) {
   var numOfPresses = document.getElementById("num-of-presses").value;
   var messageList = []
@@ -23,32 +34,24 @@ function parseMessage(button) {
     messageList.push(button)
   }
 
-  if (prevUUIDEmote == "Kappa") {
-    messageList.push("PogChamp")
-    prevUUIDEmote = "PogChamp"
-  }
-  else {
-    messageList.push("Kappa")
-    prevUUIDEmote = "Kappa"
-  }
-
   console.log(messageList)
   return messageList.join(" ");
 }
 
 function setMessage() {
-  console.log("test", selectedButton)
   if (selectedButton != "") {
     document.getElementById("chat-message").value = parseMessage(selectedButton);
   }
 }
 
 function copyText() {
-  console.log("copying")
-  var copyText = document.getElementById("chat-message");
+  var newUniqueEmoteIndex = wrapAround(prevUniqueEmoteIndex + 1, 0, uniqueMessageEmotes.length - 1)
+  prevUniqueEmoteIndex = wrapAround(prevUniqueEmoteIndex + 1, 0, uniqueMessageEmotes.length - 1)
 
-  navigator.clipboard.writeText(copyText.value);
-  console.log("copying", copyText.value)
+  var copyText = document.getElementById("chat-message").value + " " + uniqueMessageEmotes[newUniqueEmoteIndex];
+
+  navigator.clipboard.writeText(copyText);
+  console.log("copying", copyText)
   setCopiedIndicator();
 }
 
